@@ -1,0 +1,17 @@
+services:
+  db:
+    container_name: surrealdb
+    image: surrealdb/surrealdb:v1.5.5
+    env_file:
+      - .env
+    command: start --log debug --user $DB_USER --pass $DB_PASSWORD --bind 0.0.0.0:8080 rocksdb:mydatabase.db
+    user: root
+    ports:
+      - "8080:8080"
+    volumes:
+      - type: volume
+        source: surrealdbdata
+        target: /mydatabase.db
+
+volumes:
+    surrealdbdata:

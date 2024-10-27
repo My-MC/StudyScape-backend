@@ -1,0 +1,27 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi[standard]>=0.115.3",
+    "pydantic-settings>=2.6.0",
+    "surrealdb>=0.3.2",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.7.1",
+    "taskipy>=1.14.0",
+]
+
+[tool.ruff]
+lint.select = ["E", "F", "W", "I", "FAST"]
+lint.preview = true
+
+[tool.taskipy.tasks]
+run = "fastapi run app/main.py"
+dev = "fastapi dev app/main.py"
+lint = "ruff check . --fix"
+fmt = "ruff format ."
